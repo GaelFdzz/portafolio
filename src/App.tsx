@@ -1,12 +1,22 @@
-import './App.css'
+import Footer from "./pages/Footer"
+import Header from "./pages/Header"
+import Main from "./pages/Main"
+
+
 
 function App() {
 
   return (
     <>
-      <p className="read-the-docs">
-        Made by GaelFdz
-      </p>
+      <header>
+        <Header />
+      </header>
+      <main>
+        <Main />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
     </>
   )
 }
