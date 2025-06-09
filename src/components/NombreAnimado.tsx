@@ -16,14 +16,14 @@ export function NombreAnimado() {
                 ],
                 delay: (_, i) => i * 10,
                 loop: true,
-                loopDelay: 800
+                loopDelay: 1500
             })
         })
     }, [])
     return (
-        <div ref={root}>
+        <div ref={root} className="flex items-center justify-center h-screen">
             {/* Poner al centro de la pantalla */}
-            <h1 className="flex text-6xl font-bold text-white">
+            <h1 className="flex font-bold text-gray-900 dark:text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl transition-all duration-200">
                 <span>G</span>
                 <span>A</span>
                 <span>E</span>
