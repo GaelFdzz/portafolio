@@ -9,6 +9,16 @@
   <script type="module">
     import { animate } from 'https://cdn.jsdelivr.net/npm/animejs/+esm';
   </script>
+  <script>
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
 </head>
 
 <body>

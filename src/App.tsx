@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import Footer from "./components/Footer"
 import Header from "./components/Header"
-import NombreAnimado from "./components/NombreAnimado";
 import Hero from "./components/Hero";
-
-
+import SobreMi from "./components/SobreMi";
 
 function App() {
 
@@ -32,11 +30,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 dark:bg-gray-900">
+    <div className="min-h-screen transition-all bg-gray-200 dark:bg-gray-900">
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <main>
-        <NombreAnimado />
         <Hero />
+        <div className="border-2"></div>
+        <SobreMi />
       </main>
       <Footer />
     </div>

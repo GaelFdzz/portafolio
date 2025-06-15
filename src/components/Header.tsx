@@ -35,7 +35,10 @@ function Header({ toggleDarkMode, darkMode }: HeaderProps) {
                     </div>
                     {/* Dark/light mode button*/}
                     <div className="flex items-center">
-                        <button onClick={toggleDarkMode} className="text-gray-800 dark:text-yellow-400 hover:opacity-75">
+                        <button
+                            onClick={toggleDarkMode}
+                            className="text-gray-800 dark:text-yellow-400 hover:opacity-75"
+                        >
                             {darkMode ? <Sun /> : <Moon />}
                         </button>
                     </div>
