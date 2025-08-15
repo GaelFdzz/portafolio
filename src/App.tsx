@@ -27,7 +27,7 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen transition-all bg-gray-200 dark:bg-gray-900">
+    <div className="min-h-screen transition-all bg-white dark:bg-gray-900">
       <Header darkMode={darkMode} toggleDarkMode={() => setDarkMode((prev) => !prev)} />
       <main>
         <Hero />

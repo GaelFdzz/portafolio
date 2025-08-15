@@ -135,7 +135,7 @@ export function RadialMenu({ isOpen, position, onClose, navItems, toggleDarkMode
   return (
     <div
       ref={menuRef}
-      className="fixed inset-0 z-50 pointer-events-none"
+      className="fixed inset-0 z-50 pointer-events-none bg-black/70"
       style={{
         left: 0,
         top: 0,
@@ -143,7 +143,7 @@ export function RadialMenu({ isOpen, position, onClose, navItems, toggleDarkMode
     >
       {/* Centro del menú */}
       <div
-        className="absolute w-4 h-4 bg-blue-500 rounded-full pointer-events-auto transform -translate-x-1/2 -translate-y-1/2 animate-pulse"
+        className="absolute w-4 h-4 bg-blue-600 rounded-full pointer-events-auto transform -translate-x-1/2 -translate-y-1/2 animate-pulse"
         style={{
           left: position.x,
           top: position.y,
@@ -182,7 +182,7 @@ export function RadialMenu({ isOpen, position, onClose, navItems, toggleDarkMode
             <div
               className={`flex items-center justify-center w-20 h-20 backdrop-blur-xl shadow-lg border rounded-full text-sm font-medium transition-all duration-200 ${
                 isHovered
-                  ? "bg-blue-500 text-white border-blue-400 scale-110 shadow-xl"
+                  ? "bg-blue-600 text-white border-blue-400 scale-110 shadow-xl"
                   : "bg-white/90 dark:bg-gray-800/90 border-gray-200/20 dark:border-gray-700/20 text-gray-700 dark:text-gray-300"
               }`}
             >

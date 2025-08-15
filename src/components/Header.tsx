@@ -12,6 +12,7 @@ function Header({ toggleDarkMode, darkMode }: HeaderProps) {
     const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 })
     const longPressTimer = useRef<number | null>(null)
     const touchStartPos = useRef({ x: 0, y: 0 })
+    const [showHint, setShowHint] = useState(false);
 
     const navItems = [
         { href: "#inicio", label: "Inicio" },
@@ -38,10 +39,15 @@ function Header({ toggleDarkMode, darkMode }: HeaderProps) {
 
     const handleTouchEnd = () => {
         if (longPressTimer.current) {
-            clearTimeout(longPressTimer.current)
-            longPressTimer.current = null
+            clearTimeout(longPressTimer.current);
+            longPressTimer.current = null;
+            // Si el menú no se abrió, fue un toque corto
+            if (!showRadialMenu) {
+                setShowHint(true);
+                setTimeout(() => setShowHint(false), 1200); // Oculta el mensaje después de 1.2s
+            }
         }
-    }
+    };
 
     const handleTouchMove = (e: React.TouchEvent) => {
         const touch = e.touches[0]
@@ -81,28 +87,33 @@ function Header({ toggleDarkMode, darkMode }: HeaderProps) {
                         </div>
                     </div>
                 </nav>
+                <div className="sm:hidden fixed bottom-6 right-6 z-50">
+                    {/* Botón flotante para abrir el menú radial */}
+                    {showHint && (
+                        <div className="absolute right-18 bottom-0 bg-black/90 text-white px-3 py-1 rounded-md shadow-xl text-md animate-fade-in">
+                            Mantén presionado
+                        </div>
+                    )}
+                    <button
+                        className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95"
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
+                        onTouchMove={handleTouchMove}
+                    >
+                        <Menu size={24} />
+                    </button>
+                </div>
+
+                {/* Menú radial */}
+                <RadialMenu
+                    isOpen={showRadialMenu}
+                    position={menuPosition}
+                    onClose={() => setShowRadialMenu(false)}
+                    navItems={navItems}
+                    toggleDarkMode={toggleDarkMode}
+                    darkMode={darkMode}
+                />
             </header>
-
-            <div className="sm:hidden fixed bottom-6 right-6 z-50">
-                <button
-                    className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95"
-                    onTouchStart={handleTouchStart}
-                    onTouchEnd={handleTouchEnd}
-                    onTouchMove={handleTouchMove}
-                >
-                    <Menu size={24} />
-                </button>
-            </div>
-
-            {/* Menú radial */}
-            <RadialMenu
-                isOpen={showRadialMenu}
-                position={menuPosition}
-                onClose={() => setShowRadialMenu(false)}
-                navItems={navItems}
-                toggleDarkMode={toggleDarkMode}
-                darkMode={darkMode}
-            />
         </>
     )
 }
