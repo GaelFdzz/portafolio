@@ -60,7 +60,7 @@ function Hero() {
             </div>
 
             {/* Difuminado al final */}
-            <div className="absolute bottom-0 left-0 w-full h-14 bg-gradient-to-t from-gray-900 dark:from-gray-900 to-transparent z-0 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-18 bg-gradient-to-t from-white dark:from-gray-900 to-transparent z-0" />
         </section>
     )
 }
