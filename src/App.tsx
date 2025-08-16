@@ -31,7 +31,6 @@ function App() {
       <Header darkMode={darkMode} toggleDarkMode={() => setDarkMode((prev) => !prev)} />
       <main>
         <Hero />
-        <div className="border-2"></div>
         <SobreMi />
       </main>
       <Footer />

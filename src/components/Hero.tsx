@@ -1,60 +1,68 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { SplitText } from "gsap/all";
 import { Linkedin, Mail, Phone } from "lucide-react";
-
-gsap.registerPlugin(SplitText)
+import SplitText from "../animations/SplitText";
+import DarkVeil from "../animations/background/DarkVeil";
+import GlareHover from "../animations/GlareHover";
+import ProfileCard from "../animations/ProfileCard";
 
 function Hero() {
-    const heroRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (heroRef.current) {
-            let split = SplitText.create(heroRef.current, { type: "words" });
-            gsap.from(split.words, {
-                duration: 0.5,
-                opacity: 0,
-                y: 50,
-                stagger: 0.1,
-                ease: "power2.out"
-            });
-        }
-    }, [])
-
     return (
-        <section className="flex flex-col items-center justify-center min-h-screen px-4 py-8 gap-8 dark:text-white sm:flex-row sm:justify-evenly sm:items-center">
-            {/* Imagen de perfil */}
-            <div>
-                <img
-                    className="w-48 h-48 object-cover rounded-full border-4 border-blue-500 shadow-lg object-top shadow-blue-500/50 sm:w-84 sm:h-84"
-                    src="gigachad.jpg"
-                    alt="Imagen de perfil del hero"
+        <section className="relative flex flex-col sm:flex-row items-center justify-center min-h-screen gap-10 sm:gap-20 px-6 sm:px-16 lg:px-32 dark:text-white">
+
+            {/* Dark Veil de fondo */}
+            <div className="absolute inset-0 z-0">
+                <DarkVeil
+                    hueShift={14}
+                    noiseIntensity={0}
+                    scanlineIntensity={0}
+                    speed={1}
+                    scanlineFrequency={0}
+                    warpAmount={0}
                 />
             </div>
 
-            {/* Datos personales */}
-            <div ref={heroRef}>
-                <h1 className="text-5xl font-bold text-center mt-10">
-                    <span className="text-black dark:text-white">Hola, soy</span>{" "}
-                    <span className="text-blue-600">Ian Gael Fernandez Andrade</span>
-                </h1>
-                <p className="text-2xl text-center text-gray-700 mt-4 dark:text-yellow-600">
-                    Estudiante en Desarrollo de Software.
-                </p>
+            {/* Imagen de perfil */}
+            <div className="z-10">
+                <ProfileCard
+                    name="Ian Gael Fernandez Andrade"
+                    title="Ingeniero en Software"
+                    handle="gaelfdzz"
+                    status="Disponible"
+                    contactText="Contactame"
+                    avatarUrl="../../public/fotoAvatar.png"
+                    showUserInfo={true}
+                    enableTilt={true}
+                    enableMobileTilt={true}
+                />
             </div>
 
-            {/* Formas de contacto */}
-            <div className="grid grid-cols-1 gap-4 items-center text-center w-40">
-                <p className="text-2xl ">Contactame</p>
-                <div className="flex justify-between">
-                    <Mail size={40} />
-                    <Phone size={40} />
-                    <Linkedin size={40} />
+            {/* Texto y datos */}
+            <div className="z-10 flex-col items-center sm:items-start text-center sm:text-left max-w-xl">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center sm:text-left">
+                    <SplitText className="text-white text-3xl" text="Hola soy," splitType="lines" />
+                    <SplitText className="text-blue-600 text-4xl" text="Ian Gael Fernandez Andrade" splitType="lines" />
+                </h1>
+                <SplitText className="text-lg sm:text-xl lg:text-2xl mt-3 sm:mt-4 text-gray-400" text="Estudiante en desarrollo de software" splitType="lines" />
+
+                {/* Contacto */}
+                <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-12">
+                    <div className="flex justify-center gap-6 sm:gap-8 text-white">
+                        <Mail size={30} className="sm:w-10 sm:h-10" />
+                        <Phone size={30} className="sm:w-10 sm:h-10" />
+                        <Linkedin size={30} className="sm:w-10 sm:h-10" />
+                    </div>
+
+                    <GlareHover className="border-none rounded-md w-full mt-4 sm:mt-0 bg-indigo-800 py-2 px-6 sm:px-8 hover:bg-indigo-800/70 transition">
+                        <button className="text-white font-semibold cursor-pointer">
+                            Contactar
+                        </button>
+                    </GlareHover>
                 </div>
-                <button className=" rounded-md bg-indigo-800 p-1 hover:bg-indigo-800/55">Descargar CV</button>
             </div>
+
+            {/* Difuminado al final */}
+            <div className="absolute bottom-0 left-0 w-full h-14 bg-gradient-to-t from-gray-900 dark:from-gray-900 to-transparent z-0 pointer-events-none" />
         </section>
-    );
+    )
 }
 
 export default Hero;

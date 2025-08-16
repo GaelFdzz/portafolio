@@ -1,5 +1,3 @@
-"use client"
-
 import { useRef, useEffect, useState } from "react"
 import { Moon, Sun } from "lucide-react"
 
