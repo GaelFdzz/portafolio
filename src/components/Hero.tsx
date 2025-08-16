@@ -28,7 +28,7 @@ function Hero() {
                     handle="gaelfdzz"
                     status="Disponible"
                     contactText="Contactame"
-                    avatarUrl="../../public/fotoAvatar.png"
+                    avatarUrl="/fotoAvatar.png"
                     showUserInfo={true}
                     enableTilt={true}
                     enableMobileTilt={true}
