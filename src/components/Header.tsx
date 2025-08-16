@@ -96,9 +96,10 @@ function Header({ toggleDarkMode, darkMode }: HeaderProps) {
                     )}
                     <button
                         className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95"
-                        onTouchStart={handleTouchStart}
+                        onTouchStart={(e) => { e.preventDefault(); handleTouchStart(e) }}
                         onTouchEnd={handleTouchEnd}
                         onTouchMove={handleTouchMove}
+                        onContextMenu={(e) => e.preventDefault()}
                     >
                         <Menu size={24} />
                     </button>
