@@ -15,8 +15,19 @@ import {
 } from "lucide-react"
 import SpotlightCard from "../animations/SpotlightCard"
 
+// Definir el tipo para las tecnologías
+interface Technology {
+    name: string;
+    icon: React.ReactNode;
+}
+
+// Definir el tipo para las props del componente TechList
+interface TechListProps {
+    techs: Technology[];
+}
+
 const Technologies = () => {
-    const frontendTechs = [
+    const frontendTechs: Technology[] = [
         { name: "React.js", icon: <Code2 className="w-4 h-4" /> },
         { name: "Next.js", icon: <Globe className="w-4 h-4" /> },
         { name: "TypeScript", icon: <FileCode className="w-4 h-4" /> },
@@ -26,7 +37,7 @@ const Technologies = () => {
         { name: "Chakra UI", icon: <Box className="w-4 h-4" /> }
     ]
 
-    const backendTechs = [
+    const backendTechs: Technology[] = [
         { name: "Node.js", icon: <Server className="w-4 h-4" /> },
         { name: "Express.js", icon: <Zap className="w-4 h-4" /> },
         { name: "Python", icon: <Code2 className="w-4 h-4" /> },
@@ -36,7 +47,7 @@ const Technologies = () => {
         { name: "GraphQL", icon: <Database className="w-4 h-4" /> }
     ]
 
-    const databaseTechs = [
+    const databaseTechs: Technology[] = [
         { name: "MySQL", icon: <Database className="w-4 h-4" /> },
         { name: "PostgreSQL", icon: <Database className="w-4 h-4" /> },
         { name: "MongoDB", icon: <Database className="w-4 h-4" /> },
@@ -44,7 +55,7 @@ const Technologies = () => {
         { name: "Firebase", icon: <Zap className="w-4 h-4" /> }
     ]
 
-    const toolsTechs = [
+    const toolsTechs: Technology[] = [
         { name: "Git & GitHub", icon: <GitBranch className="w-4 h-4" /> },
         { name: "Docker", icon: <Box className="w-4 h-4" /> },
         { name: "Jest", icon: <TestTube className="w-4 h-4" /> },
@@ -52,9 +63,9 @@ const Technologies = () => {
         { name: "Visual Studio Code", icon: <Code className="w-4 h-4" /> }
     ]
 
-    const TechList = ({ techs }) => (
+    const TechList: React.FC<TechListProps> = ({ techs }) => (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {techs.map((tech, index) => (
+            {techs.map((tech: Technology, index: number) => (
                 <div
                     key={index}
                     className="flex items-center gap-3 p-2 rounded-md bg-white/5 hover:bg-white/10 transition-all duration-200 group"
