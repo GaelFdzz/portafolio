@@ -3,6 +3,7 @@ import Footer from "./components/Footer"
 import Header from "./components/Header"
 import Hero from "./components/Hero"
 import SobreMi from "./components/SobreMi"
+import Technologies from "./components/Technologies"
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -32,6 +33,7 @@ function App() {
       <main>
         <Hero />
         <SobreMi />
+        <Technologies />
       </main>
       <Footer />
     </div>

@@ -67,7 +67,7 @@ function Header({ toggleDarkMode, darkMode }: HeaderProps) {
         <>
             <header className="fixed top-0 left-0 right-0 z-40 px-4 pt-4">
                 {/* Navbar para desktop */}
-                <nav className="hidden sm:block max-w-4xl mx-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border border-gray-200/20 dark:border-gray-700/20 rounded-full px-6 py-3">
+                <nav className="hidden sm:block max-w-4xl mx-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-lg border border-gray-200/20 dark:border-gray-700/20 rounded-full px-6 py-3">
                     <div className="flex items-center justify-between">
                         <div>
                             {navItems.map((item, index) => (
@@ -80,11 +80,9 @@ function Header({ toggleDarkMode, darkMode }: HeaderProps) {
                                 </a>
                             ))}
                         </div>
-                        <div className="flex items-center hover:bg-gray-100/50 dark:hover:bg-gray-800/50 hover:rounded-full px-4 py-2">
-                            <button onClick={toggleDarkMode} className="text-gray-800 dark:text-yellow-400 hover:opacity-75">
-                                {darkMode ? <Sun /> : <Moon />}
-                            </button>
-                        </div>
+                        <button onClick={toggleDarkMode} className="hover:bg-gray-100/50 dark:text-yellow-400 dark:hover:bg-gray-800/50 hover:rounded-full px-4 py-2">
+                            {darkMode ? <Sun /> : <Moon />}
+                        </button>
                     </div>
                 </nav>
                 <div className="sm:hidden fixed bottom-6 right-6 z-50">

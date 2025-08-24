@@ -18,6 +18,7 @@ export interface SplitTextProps {
     rootMargin?: string;
     textAlign?: React.CSSProperties["textAlign"];
     onLetterAnimationComplete?: () => void;
+    lineHeight?: string; // Nueva prop para controlar line-height
 }
 
 const SplitText: React.FC<SplitTextProps> = ({
@@ -33,6 +34,7 @@ const SplitText: React.FC<SplitTextProps> = ({
     rootMargin = "-100px",
     textAlign = "center",
     onLetterAnimationComplete,
+    lineHeight = "1.2", // Valor por defecto mejorado
 }) => {
     const ref = useRef<HTMLParagraphElement>(null);
     const animationCompletedRef = useRef(false);
@@ -45,8 +47,13 @@ const SplitText: React.FC<SplitTextProps> = ({
 
         animationCompletedRef.current = false;
 
+        // Mejorar el manejo de líneas
         const absoluteLines = splitType === "lines";
-        if (absoluteLines) el.style.position = "relative";
+        if (absoluteLines) {
+            el.style.position = "relative";
+            // Asegurar que el line-height se aplique correctamente
+            el.style.lineHeight = lineHeight;
+        }
 
         let splitter: GSAPSplitText;
         try {
@@ -54,6 +61,8 @@ const SplitText: React.FC<SplitTextProps> = ({
                 type: splitType,
                 absolute: absoluteLines,
                 linesClass: "split-line",
+                // Agregar reducedWhite para evitar espacios en blanco innecesarios
+                reducedWhite: splitType === "lines",
             });
         } catch (error) {
             console.error("Failed to create SplitText:", error);
@@ -64,6 +73,20 @@ const SplitText: React.FC<SplitTextProps> = ({
         switch (splitType) {
             case "lines":
                 targets = splitter.lines;
+                // Aplicar estilos específicos para líneas
+                targets.forEach((line, index) => {
+                    const lineEl = line as HTMLElement;
+                    lineEl.style.display = "block";
+                    lineEl.style.position = absoluteLines ? "relative" : "static";
+                    if (absoluteLines) {
+                        lineEl.style.top = "0";
+                        lineEl.style.left = "0";
+                        // Aplicar margin-bottom solo si no es la última línea
+                        if (index < targets.length - 1) {
+                            lineEl.style.marginBottom = "0.1em";
+                        }
+                    }
+                });
                 break;
             case "words":
                 targets = splitter.words;
@@ -145,6 +168,7 @@ const SplitText: React.FC<SplitTextProps> = ({
         threshold,
         rootMargin,
         onLetterAnimationComplete,
+        lineHeight,
     ]);
 
     return (
@@ -154,6 +178,10 @@ const SplitText: React.FC<SplitTextProps> = ({
             style={{
                 textAlign,
                 wordWrap: "break-word",
+                lineHeight: lineHeight,
+                // Agregar algunas propiedades CSS para mejor renderizado
+                fontKerning: "normal",
+                textRendering: "optimizeLegibility",
             }}
         >
             {text}
